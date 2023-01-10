@@ -18,17 +18,4 @@ class Controller extends ChangeNotifier {
       }
     });
   }
-
-  //  searchMovie(String query) async {
-  //   if(query.isEmpty){
-  //     Text("Error");
-  //     isLoading = false;
-  //     notifyListeners();
-  //   }else{
-  //     movieResult.where((element) =>
-  //         element!.title!.toLowerCase().contains(query.toLowerCase()));
-  //     isLoading = true;
-  //     notifyListeners();
-  //   }
-  // }
 }
