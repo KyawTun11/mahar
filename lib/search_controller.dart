@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mahar_code_test/service.dart';
 import 'movie_model.dart';
 
 final searchProvider = StateNotifierProvider<SearchMovieController, List<Results>>((ref)
@@ -12,7 +13,7 @@ class SearchMovieController extends StateNotifier<List<Results>>{
 
   filterMovies(String query) async {
     isLoading = true;
-    //final moviesList = await MovieService.getMovies();
+    final moviesList = await MovieService.getMovies();
   if(query.isEmpty){
     isLoading = true;
   }else{

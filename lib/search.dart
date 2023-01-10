@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mahar_code_test/search_controller.dart';
+import 'package:mahar_code_test/widget/rating_widget.dart';
 import 'package:mahar_code_test/widget/search_widget.dart';
 import 'detail.dart';
 import 'home.dart';
@@ -45,7 +46,10 @@ class SearchPage extends ConsumerWidget {
                   leading: Image.network(
                       "https://image.tmdb.org/t/p/w500${items.posterPath}"),
                   title: Text(items.title!),
-                  trailing: Text("${items.voteCount!}"),
+                  subtitle:Text("Vote Count ${items.voteCount!}") ,
+                  trailing: RatingBarWidget(
+                    rating: items.voteAverage!,
+                  ),
                 ),
               );
             }),
