@@ -5,14 +5,17 @@ class SearchWidget extends StatelessWidget {
     Key? key,
     this.controller,
     this.onSubmitted,
+    this.enabled,
   }) : super(key: key);
 
   final TextEditingController? controller;
   final ValueChanged<String>? onSubmitted;
+  final bool? enabled;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      enabled: enabled,
       controller: controller,
       autofocus: false,
       onSubmitted: onSubmitted,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mahar_code_test/search.dart';
 import 'package:mahar_code_test/widget/search_widget.dart';
+
 
 
 class MyAppBarWidget extends ConsumerWidget {
@@ -8,7 +10,7 @@ class MyAppBarWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchController = TextEditingController();
+
     return SafeArea(
       child: Container(
         decoration: const BoxDecoration(
@@ -40,12 +42,18 @@ class MyAppBarWidget extends ConsumerWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: SearchWidget(
-                controller: searchController,
-                onSubmitted: (value) async {
-                  // await ref.read(moviesProvider.notifier).filterMovies(value);
-                  // searchController.clear();
+              child: InkWell(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SearchPage(),
+                    ),
+                  );
                 },
+                child: const SearchWidget(
+                  enabled: false,
+                ),
               ),
             ),
           ],
