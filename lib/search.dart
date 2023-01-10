@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mahar_code_test/widget/loading_widget.dart';
+import 'package:mahar_code_test/search_controller.dart';
 import 'package:mahar_code_test/widget/search_widget.dart';
-
-import 'controller.dart';
-
-final controller = ChangeNotifierProvider((ref) => Controller());
+import 'detail.dart';
+import 'home.dart';
 
 class SearchPage extends ConsumerWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -13,45 +11,44 @@ class SearchPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final searchController = TextEditingController();
-    var read = ref.read(controller);
     var watch = ref.watch(controller);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Search"),
-        centerTitle: true,
+        title: SearchWidget(
+          enabled: true,
+          controller: searchController,
+          onSubmitted: (value) async {
+            await ref.read(searchProvider.notifier).filterMovies(value);
+            searchController.clear();
+          },
+        ),
       ),
       body: SafeArea(
-        child: Stack(
-          children: [
-            LoadingWidget(
-              isLoading: watch.isLoading,
-              child: ListView.builder(
-                  itemCount: watch.movieResult.length,
-                  itemBuilder: (context, index) {
-                    var items = watch.movieResult[index]!;
-                return ListTile(
-                  leading: Image.network(
-                      "https://image.tmdb.org/t/p/w500${items.posterPath}"
-                  ),
-                  title: Text(items.title!),
-                );
-              }),
-            ),
-            Positioned(
-              top: 12,
-              left: 16,
-              right: 16,
-              child: SearchWidget(
-                enabled: true,
-                controller: searchController,
-                onSubmitted: (value) async {
-                  await read.searchMovie(value);
-                  searchController.clear();
+        child: ListView.builder(
+            itemCount: watch.movieResult.length,
+            itemBuilder: (context, index) {
+              var items = watch.movieResult[index]!;
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailPage(
+                        movieResult: items,
+                      ),
+                    ),
+                  );
                 },
-              ),
-            ),
-          ],
-        ),
+                child: ListTile(
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  leading: Image.network(
+                      "https://image.tmdb.org/t/p/w500${items.posterPath}"),
+                  title: Text(items.title!),
+                  trailing: Text("${items.voteCount!}"),
+                ),
+              );
+            }),
       ),
     );
   }

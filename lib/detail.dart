@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mahar_code_test/date_fomater.dart';
+import 'package:mahar_code_test/home.dart';
 import 'package:mahar_code_test/widget/rating_widget.dart';
 import 'movie_model.dart';
 
 class DetailPage extends ConsumerWidget {
-  DetailPage({
+  const DetailPage({
     Key? key,
     required this.movieResult,
   }) : super(key: key);
@@ -17,6 +18,17 @@ class DetailPage extends ConsumerWidget {
       appBar: AppBar(
         title: Text(movieResult.title!),
         centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomePage(),
+              ),
+            );
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -63,7 +75,7 @@ class DetailPage extends ConsumerWidget {
                   "https://image.tmdb.org/t/p/w500${movieResult.posterPath!}",
                   width: 120,
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Flexible(
                   child: Text(
                     movieResult.overview!,
