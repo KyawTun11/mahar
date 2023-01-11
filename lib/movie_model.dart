@@ -43,7 +43,7 @@ class Results {
   String? releaseDate;
   String? title;
   bool? video;
-  double? voteAverage;
+  var voteAverage;
   int? voteCount;
 
   Results(
@@ -59,7 +59,7 @@ class Results {
         this.releaseDate,
         this.title,
         this.video,
-        this.voteAverage,
+        required this.voteAverage,
         this.voteCount});
 
   Results.fromJson(Map<String, dynamic> json) {

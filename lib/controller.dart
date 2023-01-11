@@ -18,4 +18,17 @@ class Controller extends ChangeNotifier {
       }
     });
   }
+
+   postData(String search) {
+    MovieService.postMovies(search).then((value) {
+      if (value != null) {
+        movieResult = value.results!;
+        isLoading = true;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
 }
