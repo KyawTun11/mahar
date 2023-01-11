@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mahar_code_test">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="mahar_code_test"
         android:name="${applicationName}"
