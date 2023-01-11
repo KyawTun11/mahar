@@ -43,7 +43,13 @@ class DetailPage extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(movieResult.originalTitle!),
+                Flexible(
+                  child: Text(
+                    movieResult.originalTitle!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
                 Text(
                   dateFormat(movieResult.releaseDate!),
                 ),
@@ -54,9 +60,9 @@ class DetailPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("${movieResult.voteCount!}"),
-                  RatingBarWidget(
-                    rating: movieResult.voteAverage!,
-                  ),
+                RatingBarWidget(
+                  rating: movieResult.voteAverage!,
+                ),
               ],
             ),
             const SizedBox(height: 8),
