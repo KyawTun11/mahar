@@ -35,8 +35,10 @@ class DetailPage extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(
-                "https://image.tmdb.org/t/p/w500${movieResult.backdropPath!}"),
+            movieResult.posterPath == null
+                ? const Text("Not found image")
+                : Image.network(
+                    "https://image.tmdb.org/t/p/w500${movieResult.backdropPath}"),
             const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,9 +54,9 @@ class DetailPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("${movieResult.voteCount!}"),
-                RatingBarWidget(
-                  rating: movieResult.voteAverage!,
-                ),
+                  RatingBarWidget(
+                    rating: movieResult.voteAverage!,
+                  ),
               ],
             ),
             const SizedBox(height: 8),
@@ -71,10 +73,12 @@ class DetailPage extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.network(
-                  "https://image.tmdb.org/t/p/w500${movieResult.posterPath!}",
-                  width: 120,
-                ),
+                movieResult.posterPath == null
+                    ? const Text("Not found image")
+                    : Image.network(
+                        "https://image.tmdb.org/t/p/w500${movieResult.posterPath}",
+                        width: 120,
+                      ),
                 const SizedBox(width: 10),
                 Flexible(
                   child: Text(

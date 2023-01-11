@@ -59,7 +59,7 @@ class Results {
         this.releaseDate,
         this.title,
         this.video,
-        required this.voteAverage,
+        this.voteAverage,
         this.voteCount});
 
   Results.fromJson(Map<String, dynamic> json) {

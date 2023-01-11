@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mahar_code_test/movie_model.dart';
-import 'package:mahar_code_test/search_controller.dart';
 import 'package:mahar_code_test/widget/loading_widget.dart';
-import 'package:mahar_code_test/widget/rating_widget.dart';
 import 'package:mahar_code_test/widget/search_widget.dart';
 import 'controller.dart';
 import 'detail.dart';
-import 'home.dart';
 
 final controller = ChangeNotifierProvider((ref) => Controller());
 
@@ -58,10 +54,7 @@ class SearchPage extends ConsumerWidget {
                               : Image.network(
                                   "https://image.tmdb.org/t/p/w500${items.posterPath}"),
                           title: Text(items.title!),
-                          subtitle: Text("Vote Count ${items.voteCount!}"),
-                          // trailing: RatingBarWidget(
-                          //   rating: items.voteAverage ?? 0,
-                          // ),
+                          trailing: Text("Vote Count ${items.voteCount!}")
                         ),
                       );
                     }),
